@@ -14,11 +14,30 @@ variableGroups:
     visible: false
     variables:
     - ${tenancy_ocid}
+    - ${compartment_ocid}
     - ${region}
-#    - $instance_os
-#    - $linux_os_version
-#    - $label_prefix
-#    - $lab_name
+    - ${user_ocid}
+    - ${fingerprint}
+    - ${private_key_path}
+    - ${private_key_password}
+    - ${private_key}
+    - ${availability_domain_name}
+    - ${block_volume_name}
+    - ${block_volume_size}
+    - ${bv_attachment_display_name}
+    - ${bv_attachment_name}
+    - ${compartment_ocid}
+    - ${instance_memory}
+    - ${instance_name}
+    - ${instance_os}
+    - ${instance_shape}
+    - ${lab_name}
+    - ${label_prefix}
+    - ${linux_os_version}
+    - ${ocpu_count}
+    - ${public_sn_dns_label}
+    - ${vcn_cidr}
+    - ${vcn_dns_label}
   - title: "License Agreement"
     visible: true
     variables:

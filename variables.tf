@@ -8,23 +8,23 @@ variable "private_key_path" {}
 variable "availability_domain_name" {
   default     = null
 }
-variable "is_always_free" {
-  default     = false
-}
+#variable "is_always_free" {
+#  default     = false
+#}
 
-# Compartment
-variable "dedicated_compartment" {
-  description = "Create a dedicated compartment"
-  default     = false
-}
+## Compartment
+#variable "dedicated_compartment" {
+#  description = "Create a dedicated compartment"
+#  default     = false
+#}
 variable "lab_name" {
   description = "Compartment name"
   default     = "upgrade"
 }
-variable "delete_compartment" {
-  description = "Delete dedicated compartment"
-  default     = false
-}
+#variable "delete_compartment" {
+#  description = "Delete dedicated compartment"
+#  default     = false
+#}
 
 # Networking
 variable "vcn_cidr" {
@@ -34,17 +34,17 @@ variable "vcn_cidr" {
 variable "vcn_dns_label" {
   default     = "lab"
 }
-variable "public_sn_display_name" {
-  default     = "lab_public_subnet"
-}
+#variable "public_sn_display_name" {
+#  default     = "lab_public_subnet"
+#}
 variable "public_sn_dns_label" {
   default     = "lab"
 }
 
 # IP Assignment
-variable "public_ip_display_name" {
-  default     = "lab_public_ip"
-}
+#variable "public_ip_display_name" {
+#  default     = "lab_public_ip"
+#}
 
 # Instance
 variable "instance_shape" {
