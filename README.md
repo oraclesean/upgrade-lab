@@ -20,37 +20,33 @@ Confirm that you have accepted the License Agreement by checking the box.
 
 ![p2](/images/p2.png)
 
-Add or paste an SSH key.  [How to generate an SSH key](https://docs.oracle.com/en/cloud/cloud-at-customer/occ-get-started/generate-ssh-key-pair.html)
+Select the source database version, either 11 (for 11.2.0.4) or 12 (for 12.1.0.2).
 
 ![p3](/images/p3.png)
 
-Select the source database version, either 11 (for 11.2.0.4) or 12 (for 12.1.0.2).
+Check "Show advanced options" and uncheck the "Auto-generate SSH key" box if you want to add your own SSH key.
 
-![p4](/images/p4.png)
+![p4](/images/pr4.png)
 
-Check "Show advanced options" if you want to assign the lab to a specific compartment, change the instance shape (the default is VM.Standard.E3.Flex), or increase OCPU or memory.
+Add or paste an SSH key.  [How to generate an SSH key](https://docs.oracle.com/en/cloud/cloud-at-customer/occ-get-started/generate-ssh-key-pair.html)
 
-![p4](/images/p5.png)
+![p5](/images/p5.png)
 
-Click the "Next" button.
+Click the "Next" button. On the next page, make sure the "Run Apply" checkbox is checked, then click the "Create" button.
 
 ![p6](/images/p6.png)
 
-Review the stack information and make sure the "Run Apply" checkbox is checked, then click the "Create" button.
+Resource Manager will begin building the stack. It will take 30-35 minutes.
 
 ![p7](/images/p7.png)
 
-Resource Manager will begin building the stack. The Resource Manager Job icon turns green when it finishes the initial provisioning.
+When the job completes, the "RMJ" box turns green and a new tab will appear (you may need to reload the page) titled "Application Information". Select this tab.
 
 ![p8](/images/p8.png)
 
-A new tab will appear (you may need to reload the page) titled "Application Information". Select this tab.
+Copy the "Compute instance public IP".
 
 ![p9](/images/p9.png)
-
-Copy the "Compute public IP address" using the 'Copy' option.
-
-![p10](/images/p10.png)
 
 Open a terminal or shell session on your local machine and enter the following command, substituting the path to your SSH key and the public IP address of the compute instance you just copied from OCI:
 
