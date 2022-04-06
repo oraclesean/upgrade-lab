@@ -3,7 +3,6 @@ variable "compartment_ocid" {}
 variable "region" {}
 variable "fingerprint" {}
 variable "user_ocid" {}
-variable "ssh_public_key_file" {}
 variable "private_key_path" {}
 variable "availability_domain_name" {
   default     = null
