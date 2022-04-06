@@ -89,68 +89,68 @@ variables:
         - accept_license
     default: false
 
-# Network
-  vcn:
-    type: string
-    visible: 
-      and:
-        - show_advanced
-    required: true
-    title: "VCN name"
-    description: "Type VCN name where your instance will be deployed."
+## Network
+#  vcn:
+#    type: string
+#    visible: 
+#      and:
+#        - show_advanced
+#    required: true
+#    title: "VCN name"
+#    description: "Type VCN name where your instance will be deployed."
 
-  vcn_cidr:
-    type: string
-    visible: 
-      and:
-        - show_advanced
-    required: false
-    pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
-    title: "VCN CIDR"
-    description: "Choose VCN CIDR for your instance deployment."
+#  vcn_cidr:
+#    type: string
+#    visible: 
+#      and:
+#        - show_advanced
+#    required: false
+#    pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
+#    title: "VCN CIDR"
+#    description: "Choose VCN CIDR for your instance deployment."
 
-# Instance 
-  compartment_ocid:
-    type: oci:identity:compartment:id
-    required: true
-    visible: 
-      and:
-        - show_advanced
-    title: "Compartment"
-    description: "Compartment where your instance will be deployed."
+## Instance 
+#  compartment_ocid:
+#    type: oci:identity:compartment:id
+#    required: true
+#    visible: 
+#      and:
+#        - show_advanced
+#    title: "Compartment"
+#    description: "Compartment where your instance will be deployed."
 
-  instance_shape:
-    type: oci:core:instanceshape:name
-    required: false
-    visible: 
-      and:
-        - show_advanced
-    title: "Compute node shape"
-    description: "Choose Instance Shape for database host."
-#    default: "VM.Standard.E2.1.Micro"
-    default: "VM.Standard.E3.Flex"
-    dependsOn:
-      compartmentId: ${compartment_ocid}
+#  instance_shape:
+#    type: oci:core:instanceshape:name
+#    required: false
+#    visible: 
+#      and:
+#        - show_advanced
+#    title: "Compute node shape"
+#    description: "Choose Instance Shape for database host."
+##    default: "VM.Standard.E2.1.Micro"
+#    default: "VM.Standard.E3.Flex"
+#    dependsOn:
+#      compartmentId: ${compartment_ocid}
 
-  ocpu_count:
-    type: integer
-    required: false
-    visible:
-      and:
-        - show_advanced
-    title: "OCPU Cores"
-    description: "OCPU Cores to assign to flexible shapes."
-    default: 2
+#  ocpu_count:
+#    type: integer
+#    required: false
+#    visible:
+#      and:
+#        - show_advanced
+#    title: "OCPU Cores"
+#    description: "OCPU Cores to assign to flexible shapes."
+#    default: 2
 
-  instance_memory:
-    type: integer
-    required: false
-    visible:
-      and:
-        - show_advanced
-    title: "Instance Memory"
-    description: "Memory assignment for flexible shapes."
-    default: 32
+#  instance_memory:
+#    type: integer
+#    required: false
+#    visible:
+#      and:
+#        - show_advanced
+#    title: "Instance Memory"
+#    description: "Memory assignment for flexible shapes."
+#    default: 32
 
   generate_public_ssh_key:
     type: boolean
