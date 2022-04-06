@@ -26,7 +26,7 @@ Select the source database version, either 11 (for 11.2.0.4) or 12 (for 12.1.0.2
 
 Check "Show advanced options" and uncheck the "Auto-generate SSH key" box if you want to add your own SSH key.
 
-![p4](/images/pr4.png)
+![p4](/images/p4.png)
 
 Add or paste an SSH key.  [How to generate an SSH key](https://docs.oracle.com/en/cloud/cloud-at-customer/occ-get-started/generate-ssh-key-pair.html)
 
