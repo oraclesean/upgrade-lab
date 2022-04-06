@@ -1,0 +1,155 @@
+title: "Deploy a containerized database upgrade instance on OCI"
+description: "Deploy containerized Oracle database resources for upgrade from 11g/12c to 21c on OCI using a single compute instance. "
+schemaVersion: 1.1.0
+version: "20190304"
+locale: "en"
+
+variableGroups:
+- title: General Configuration
+  visible: false
+  variables:
+  - tenancy_ocid
+  - region
+  - instance_os
+  - linux_os_version
+  - label_prefix
+  - lab_name
+
+- title: Lab Version
+  variables:
+  - lab_version
+
+- title: Optional Configuration
+  visible: true
+  variables:
+  - show_advanced
+  - compartment_ocid
+  - instance_shape
+  - ocpu_count
+  - instance_memory
+  - generate_public_ssh_key
+  - public_ssh_key
+  - vcn
+  - vcn_cidr
+
+outputGroups:
+- title: Service Endpoints
+  outputs:
+    - lab_public_ip
+- title: Generated Passwords
+  outputs:
+    - generated_ssh_private_key
+
+outputs:
+  lab_public_ip:
+    type: link
+    title: Compute instance public IP
+    description: Compute instance public IP
+  generated_ssh_private_key:
+    title: "Generated SSH Private Key"
+    description: "Generated SSH Private Key"
+    type: copyableString
+    visible: true
+
+variables:
+
+  lab_version:
+    type: enum
+    title: "Source database version (11g or 12c)"
+    description: "Choose the version of the source database: 11g or 12c"
+    visible: true
+    enum:
+    - 11
+    - 12
+
+  show_advanced:
+    type: boolean
+    title: "Show advanced options?"
+    description: "Shows advanced options."
+    visible: true
+    default: false
+
+# Network
+  vcn:
+    type: string
+    visible: 
+      and:
+        - show_advanced
+    required: true
+    title: "VCN name"
+    description: "Type VCN name where your instance will be deployed."
+
+  vcn_cidr:
+    type: string
+    visible: 
+      and:
+        - show_advanced
+    required: false
+    pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
+    title: "VCN CIDR"
+    description: "Choose VCN CIDR for your instance deployment."
+
+# Instance 
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    required: true
+    visible: 
+      and:
+        - show_advanced
+    title: "Compartment"
+    description: "Compartment where your instance will be deployed."
+
+  instance_shape:
+    type: oci:core:instanceshape:name
+    required: false
+    visible: 
+      and:
+        - show_advanced
+    title: "Compute node shape"
+    description: "Choose Instance Shape for database host."
+#    default: "VM.Standard.E2.1.Micro"
+    default: "VM.Standard.E3.Flex"
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+
+  ocpu_count:
+    type: integer
+    required: false
+    visible:
+      and:
+        - show_advanced
+    title: "OCPU Cores"
+    description: "OCPU Cores to assign to flexible shapes."
+    default: 2
+
+  instance_memory:
+    type: integer
+    required: false
+    visible:
+      and:
+        - show_advanced
+    title: "Instance Memory"
+    description: "Memory assignment for flexible shapes."
+    default: 32
+
+  generate_public_ssh_ke.y:
+  e type: boolean
+    title: "Auto generate public ssh key?"
+    required: true
+    visible:
+      and:
+        - show_advanced 
+
+  public_ssh_key:
+    type: oci:core:ssh:publickey
+    title: "Import your own SSH public key"
+    additionalProps:
+      allowMultiple: true
+    description: "SSH key for remote access to the public IP"
+    required: false
+    pattern: "((^(ssh-rsa AAAAB3NzaC1yc2|ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNT|ecdsa-sha2-nistp384 AAAAE2VjZHNhLXNoYTItbmlzdHAzODQAAAAIbmlzdHAzOD|ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1Mj|ssh-ed25519 AAAAC3NzaC1lZDI1NTE5|ssh-dss AAAAB3NzaC1kc3)[0-9A-Za-z+\/]+[=]{0,3})( [^,]*)?)(,((ssh-rsa AAAAB3NzaC1yc2|ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNT|ecdsa-sha2-nistp384 AAAAE2VjZHNhLXNoYTItbmlzdHAzODQAAAAIbmlzdHAzOD|ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1Mj|ssh-ed25519 AAAAC3NzaC1lZDI1NTE5|ssh-dss AAAAB3NzaC1kc3)[0-9A-Za-z+\/]+[=]{0,3})( [^,]*)?)*$"
+    visible: 
+      and:
+        - show_advanced
+        - not:
+          - generate_public_ssh_key
