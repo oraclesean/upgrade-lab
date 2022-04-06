@@ -40,13 +40,9 @@ Resource Manager will begin building the stack. It will take 30-35 minutes.
 
 ![p7](/images/p7.png)
 
-When the job completes, the "RMJ" box turns green and a new tab will appear (you may need to reload the page) titled "Application Information". Select this tab.
+When the job completes, the "RMJ" box turns green and a new tab will appear (you may need to reload the page) titled "Application Information". Select this tab and copy the "Compute instance public IP".
 
 ![p8](/images/p8.png)
-
-Copy the "Compute instance public IP".
-
-![p9](/images/p9.png)
 
 Open a terminal or shell session on your local machine and enter the following command, substituting the path to your SSH key and the public IP address of the compute instance you just copied from OCI:
 
