@@ -1,9 +1,17 @@
 variable "tenancy_ocid" {}
-variable "compartment_ocid" {}
 variable "region" {}
-variable "fingerprint" {}
-variable "user_ocid" {}
-variable "private_key_path" {}
+variable "compartment_ocid" {
+  default = ""
+}
+variable "user_ocid" {
+  default = ""
+}
+variable "fingerprint" {
+  default = ""
+}
+variable "private_key_path" {
+  default = ""
+}
 variable "availability_domain_name" {
   default     = null
 }

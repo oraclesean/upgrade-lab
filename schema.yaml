@@ -64,8 +64,8 @@ outputGroups:
 outputs:
   lab_public_ip:
     type: link
-    title: Compute instance public IP
-    description: Compute instance public IP
+    title: "Compute instance public IP"
+    description: "Compute instance public IP"
   generated_ssh_private_key:
     title: "Generated SSH Private Key"
     description: "Generated SSH Private Key"
