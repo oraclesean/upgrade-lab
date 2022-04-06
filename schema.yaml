@@ -10,38 +10,35 @@ source:
   type: quickstart
 
 variableGroups:
-  - title: General Configuration
+  - title: "General Configuration"
     visible: false
     variables:
-    - $tenancy_ocid
-    - $region
-    - $instance_os
-    - $linux_os_version
-    - $label_prefix
-    - $lab_name
-
+    - ${tenancy_ocid}
+    - ${region}
+#    - $instance_os
+#    - $linux_os_version
+#    - $label_prefix
+#    - $lab_name
   - title: "License Agreement"
     visible: true
     variables:
-    - $accept_license
-
-  - title: Lab Version
+    - ${accept_license}
+  - title: "Lab Version"
     visible: accept_license
     variables:
-    - lab_version
-    - $show_advanced
-
-  - title: Optional Configuration
+    - ${lab_version}
+    - ${show_advanced}
+  - title: "Optional Configuration"
     visible: show_advanced
     variables:
-    - compartment_ocid
-    - instance_shape
-    - ocpu_count
-    - instance_memory
+#    - compartment_ocid
+#    - instance_shape
+#    - ocpu_count
+#    - instance_memory
     - generate_public_ssh_key
     - public_ssh_key
-    - vcn
-    - vcn_cidr
+#    - vcn
+#    - vcn_cidr
 
 outputGroups:
   - title: Service Endpoints
@@ -67,22 +64,29 @@ variables:
     title: "I have reviewed and accept the Oracle Licensing Agreement."
     description: "You must agree to and accept the Oracle Standard Terms and Restrictions listed on the Oracle Container Registry (https://container-registry.oracle.com) prior to running this lab. By checking this box, you affirm that you have accepted the Oracle Standard Terms and Restrictions"
     type: boolean
+    required: true
     default: false
 
   lab_version:
     type: enum
+    required: true
     title: "Source database version (11g or 12c)"
     description: "Choose the version of the source database: 11g or 12c"
-    visible: true
+    visible:
+      and:
+        - accept_license
+    default: "11"
     enum:
-    - 11
-    - 12
+    - "11"
+    - "12"
 
   show_advanced:
     type: boolean
     title: "Show advanced options?"
     description: "Shows advanced options."
-    visible: true
+    visible:
+      and:
+        - accept_license
     default: false
 
 # Network
@@ -148,8 +152,8 @@ variables:
     description: "Memory assignment for flexible shapes."
     default: 32
 
-  generate_public_ssh_ke.y:
-  e type: boolean
+  generate_public_ssh_key:
+    type: boolean
     title: "Auto generate public ssh key?"
     required: true
     visible:
