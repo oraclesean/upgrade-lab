@@ -1,5 +1,5 @@
 data "oci_identity_tenancy" "tenancy" {
-  tenancy_id = "${var.tenancy_ocid}"
+  tenancy_id = var.tenancy_ocid
 }
 
 data "oci_core_images" "InstanceImageOCID" {
