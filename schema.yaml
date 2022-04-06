@@ -1,43 +1,54 @@
 title: "Deploy a containerized database upgrade instance on OCI"
 description: "Deploy containerized Oracle database resources for upgrade from 11g/12c to 21c on OCI using a single compute instance. "
+stackDescription: "Oracle Database upgrade lab quickstart automation. It creates all necessary OCI resources to run Oracle database upgrades in Docker containers on Oracle Cloud Infrastructure using terraform."
+informationalText: "This stack provisions a new compartment, adds necessary VCN and network assets, and creates and provisions a compute instance ready to run Oracle databases for upgrade."
 schemaVersion: 1.1.0
 version: "20190304"
 locale: "en"
 
+source:
+  type: quickstart
+
 variableGroups:
-- title: General Configuration
-  visible: false
-  variables:
-  - tenancy_ocid
-  - region
-  - instance_os
-  - linux_os_version
-  - label_prefix
-  - lab_name
+  - title: General Configuration
+    visible: false
+    variables:
+    - $tenancy_ocid
+    - $region
+    - $instance_os
+    - $linux_os_version
+    - $label_prefix
+    - $lab_name
 
-- title: Lab Version
-  variables:
-  - lab_version
+  - title: "License Agreement"
+    visible: true
+    variables:
+    - $accept_license
 
-- title: Optional Configuration
-  visible: true
-  variables:
-  - show_advanced
-  - compartment_ocid
-  - instance_shape
-  - ocpu_count
-  - instance_memory
-  - generate_public_ssh_key
-  - public_ssh_key
-  - vcn
-  - vcn_cidr
+  - title: Lab Version
+    visible: accept_license
+    variables:
+    - lab_version
+    - $show_advanced
+
+  - title: Optional Configuration
+    visible: show_advanced
+    variables:
+    - compartment_ocid
+    - instance_shape
+    - ocpu_count
+    - instance_memory
+    - generate_public_ssh_key
+    - public_ssh_key
+    - vcn
+    - vcn_cidr
 
 outputGroups:
-- title: Service Endpoints
-  outputs:
+  - title: Service Endpoints
+    outputs:
     - lab_public_ip
-- title: Generated Passwords
-  outputs:
+  - title: Generated Passwords
+    outputs:
     - generated_ssh_private_key
 
 outputs:
@@ -52,6 +63,11 @@ outputs:
     visible: true
 
 variables:
+  accept_license:
+    title: "I have reviewed and accept the Oracle Licensing Agreement."
+    description: "You must agree to and accept the Oracle Standard Terms and Restrictions listed on the Oracle Container Registry (https://container-registry.oracle.com) prior to running this lab. By checking this box, you affirm that you have accepted the Oracle Standard Terms and Restrictions"
+    type: boolean
+    default: false
 
   lab_version:
     type: enum
